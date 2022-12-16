@@ -24,11 +24,14 @@ public class RmuttATM2 {
         Account account5 = new Account();
         Account account6 = new Account();
 
+        /* ส่วนหน้าของผู้จัดการระบบธนาคาร*/
         System.out.print("""
                          ********************************************************************************
                                       *Wellcome to RMUTT Engineering Banking System*
                          ********************************************************************************
                          """);
+
+        // ส่วน Login และ Register ของ ผู้จัดการ
         boolean loop = true;
         while (loop == true) {
             Scanner input = new Scanner(System.in);
@@ -70,6 +73,7 @@ public class RmuttATM2 {
             }
         }
 
+        // ส่วนกำหนดจำนวน ผู้ใช้งาน
         int amountAc = 0;
         boolean loop2 = true;
         while (loop2 == true) {
@@ -82,7 +86,7 @@ public class RmuttATM2 {
                 loop2 = false;
             }
         }
-
+        // ส่วนกำหนดข้อมูล ผู้ใช้งาน
         System.out.println("Enter Detail of each account.");
         for (int i = 1; i <= amountAc; i++) {
             System.out.println("\nNo." + i);
@@ -139,12 +143,14 @@ public class RmuttATM2 {
         }
         System.out.println("********************************************************************************\n");
 
+        /* ส่วนหน้าของผู้ใช้งานตู้ ATM*/
         while (true) {
             Scanner input = new Scanner(System.in);
             System.out.println("""
                                -----------------------------------------------
                                  ATM Computer Thanyaburi Bank
                                -----------------------------------------------""");
+        // ส่วน Login เข้าบัญชีธนาคาร
             System.out.print("""
                              ////Log In////
                              Account ID : """);
