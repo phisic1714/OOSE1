@@ -122,6 +122,8 @@ public class bankSys implements ATMActionable {
             String confPass = input2.nextLine();
             if (!getPassword().equals(confPass)) {
                 System.out.println("!!Access Denied.!!");
+                System.out.println("-----------------------------------------------\n");
+
                 break;
             }
             System.out.println("""
@@ -131,11 +133,10 @@ public class bankSys implements ATMActionable {
             System.out.print("Continue?(Y/n) : ");
             String conti = input2.nextLine();
             if ("Y".equals(conti.toUpperCase())) {
+                System.out.println("-----------------------------------------------\n");
                 break;
             }
-            System.out.println("-----------------------------------------------\n");
         }
-        System.out.println("-----------------------------------------------\n");
     }
 
     public void Withdraw() {
@@ -162,17 +163,18 @@ public class bankSys implements ATMActionable {
                 System.out.println("""
                                            -----------------------------------------------
                                            !!Insufficient Funds!!
-                                          """);
+                                           -----------------------------------------------""");
                 ATMMenu();
             } else {
                 setBalance(balance);
                 System.out.println("-----------------------------------------------\n");
                 System.out.println("Your Balance is '" + getBalance() + "'");
+                System.out.println("-----------------------------------------------\n");
                 ATMMenu();
                 break;
             }
         }
-        System.out.println("-----------------------------------------------\n");
+
     }
 
     public void Deposit() {
@@ -186,6 +188,7 @@ public class bankSys implements ATMActionable {
             String confPass = input3.nextLine();
             if (!getPassword().equals(confPass)) {
                 System.out.println("!!Access Denied.!!");
+                System.out.println("-----------------------------------------------\n");
                 ATMMenu();
             }
             System.out.println("""
@@ -198,17 +201,19 @@ public class bankSys implements ATMActionable {
             if (balance > 1000000) {
                 System.out.println("""
                                            -----------------------------------------------
-                                           !!Over Limit!!""");
+                                           !!Over Limit!!
+                                           -----------------------------------------------""");
                 ATMMenu();
             } else {
                 setBalance(balance);
                 System.out.println("-----------------------------------------------\n");
                 System.out.println("Your Balance is '" + getBalance() + "'");
+                System.out.println("-----------------------------------------------\n");
                 ATMMenu();
                 break;
             }
         }
-        System.out.println("-----------------------------------------------\n");
+
     }
 
     public void Transfer() {
@@ -222,6 +227,7 @@ public class bankSys implements ATMActionable {
             String confPass = input3.nextLine();
             if (!getPassword().equals(confPass)) {
                 System.out.println("!!Access Denied.!!");
+                System.out.println("-----------------------------------------------\n");
                 ATMMenu();
             }
             System.out.println("""
@@ -230,7 +236,7 @@ public class bankSys implements ATMActionable {
                                        Account Citizen ID : """ + getId());
             System.out.print("Enter Destination Account Citizen ID : ");
             String destiAc = input3.nextLine();
-            System.out.print("Destination Account Citizen Name : " + accountNameList.get(destiAc)+"\n");
+            System.out.print("Destination Account Citizen Name : " + accountNameList.get(destiAc) + "\n");
             System.out.print("Enter Tranfer Amount : ");
             int newBalance = input3.nextInt();
             int balance = getBalance() - newBalance;
@@ -238,24 +244,25 @@ public class bankSys implements ATMActionable {
                 System.out.println("""
                                            -----------------------------------------------
                                            !!Insufficient Funds!!
-                                           """);
+                                           -----------------------------------------------""");
                 ATMMenu();
             }
             int desBalance = accountBalanceList.get(destiAc) + newBalance;
             if (desBalance > 1000000) {
                 System.out.println("""
                                            -----------------------------------------------
-                                           !!Over Limit!!""");
+                                           !!Over Limit!!
+                                           -----------------------------------------------""");
                 ATMMenu();
             } else {
                 accountBalanceList.put(destiAc, desBalance);
                 setBalance(balance);
                 System.out.println("-----------------------------------------------\n" + "!!Transfer to '" + accountNameList.get(destiAc) + "' is Complete!!");
                 System.out.println("Your Balance is '" + getBalance() + "'");
-
+                System.out.println("-----------------------------------------------\n");
                 break;
             }
         }
-        System.out.println("-----------------------------------------------\n");
+
     }
 }

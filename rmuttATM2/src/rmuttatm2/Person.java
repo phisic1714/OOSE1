@@ -19,15 +19,15 @@ public class Person extends bankSys {
         while (id.length() != 13) {
             System.out.print("""
                              !!You must Enter Citizen ID 13 Digit!!
-                             Account ID(13 Digit)= """);
+                             Citizen ID(13 Digit)= """);
             id = input.nextLine();
         }
         System.out.print("Name(less than 50 Digit)= ");
         String name = input.nextLine();
         while (name.length() > 50) {
             System.out.print("""
-                             !!You must Enter Account Name less than 50 Digit!!
-                             Account Name(less than 50 Digit)= """);
+                             !!You must Enter Name less than 50 Digit!!
+                             Name(less than 50 Digit)= """);
             name = input.nextLine();
         }
 
