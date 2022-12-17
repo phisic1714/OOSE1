@@ -170,7 +170,7 @@ public class bankSys implements ATMActionable {
                 System.out.println("-----------------------------------------------\n");
                 System.out.println("Your Balance is '" + getBalance() + "'");
                 System.out.println("-----------------------------------------------\n");
-                ATMMenu();
+
                 break;
             }
         }
@@ -209,7 +209,7 @@ public class bankSys implements ATMActionable {
                 System.out.println("-----------------------------------------------\n");
                 System.out.println("Your Balance is '" + getBalance() + "'");
                 System.out.println("-----------------------------------------------\n");
-                ATMMenu();
+
                 break;
             }
         }
@@ -236,6 +236,14 @@ public class bankSys implements ATMActionable {
                                        Account Citizen ID : """ + getId());
             System.out.print("Enter Destination Account Citizen ID : ");
             String destiAc = input3.nextLine();
+                if (accountNameList.get(destiAc) == null) {
+                    System.out.println("""
+                                          -----------------------------------------------
+                                          ID Doesn't Exist.
+                                          ----------------------------------------------- """);
+                                         
+                    break;
+                }
             System.out.print("Destination Account Citizen Name : " + accountNameList.get(destiAc) + "\n");
             System.out.print("Enter Tranfer Amount : ");
             int newBalance = input3.nextInt();

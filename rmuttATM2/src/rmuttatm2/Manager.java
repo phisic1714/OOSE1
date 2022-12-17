@@ -44,7 +44,7 @@ public class Manager extends Person {
                            -----------------------------------------------""");
         System.out.println("""
                            ////Main Menu////
-                           Account ID : """ + getId());
+                           Manager ID : """ + getId());
         System.out.println("""
                            Manager Menu Service
                            1. Manager Information

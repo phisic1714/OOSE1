@@ -23,29 +23,29 @@ public class RmuttATM2 {
         Account account4 = new Account();
         Account account5 = new Account();
         Account account6 = new Account();
-        /*เข้าสู่ระบบธนาคาร */
+        
+        /* เข้าสู่ระบบธนาคาร */
         while (true) {
-            /* ส่วนของผู้จัดการระบบธนาคาร*/
+            /* ส่วนของผู้จัดการระบบธนาคาร */
             System.out.print("""
-                         ********************************************************************************
-                                      *Wellcome to RMUTT Engineering Banking System*
-                         ********************************************************************************
-                         """);
+                    ********************************************************************************
+                                 *Wellcome to RMUTT Engineering Banking System*
+                    ********************************************************************************
+                    """);
 
             // ส่วน Login และ Register ของ ผู้จัดการ
             boolean loop = true;
             while (loop == true) {
                 Scanner input = new Scanner(System.in);
                 System.out.println("""
-                                    Please Select Menu
-                                    1. Manager Log In
-                                    2. Manager Register """);
+                        Please Select Menu
+                        1. Manager Log In
+                        2. Manager Register """);
 
                 System.out.print("Choose : ");
                 int menuNO = input.nextInt();
                 switch (menuNO) {
                     case 1:
-                        System.out.print("////Manager Log In////\n");
                         break;
                     case 2:
                         System.out.print("////Manager Register////\n");
@@ -56,20 +56,20 @@ public class RmuttATM2 {
                         break;
                 }
                 Scanner input2 = new Scanner(System.in);
-                System.out.print("Manager Username = ");
+                System.out.print("////Manager Log In////\nManager Username = ");
                 String managerId = input2.nextLine();
                 System.out.print("Manager Password = ");
                 String managerPass = input2.nextLine();
                 if (!managerId.equals(manager.getUsername()) || !managerPass.equals(manager.getPassword())) {
                     System.out.println("""
-                                   ****************************************
-                                   !!Access Denied.!!
-                                  **************************************** """);
+                            ****************************************
+                             !!Access Denied.!!
+                            **************************************** """);
                 } else {
                     System.out.println("""
-                                   ****************************************
-                                   !!Complete.!!
-                                  **************************************** """);
+                            ****************************************
+                             !!Complete.!!
+                            **************************************** """);
                     loop = false;
                 }
             }
@@ -79,16 +79,29 @@ public class RmuttATM2 {
             boolean loop2 = true;
             while (loop2 == true) {
                 Scanner input = new Scanner(System.in);
-                System.out.print("////Account Setting////\nEnter amount of all account(Limit 6 Account) = ");
+                 System.out.println("""
+                        ////Account Assign////
+                        Please Select Menu
+                        1. Setting Account
+                        2. ATM Menu """);
+                System.out.print("Choose : ");
+                int menuNO = input.nextInt();
+                switch (menuNO){
+                    case 1:
+                System.out.print("Enter amount of all account(Limit 6 Account) = ");
                 amountAc = input.nextInt();
                 if (amountAc > 6) {
                     System.out.println("!!You enter more than 6 Account!!");
                 } else {
                     loop2 = false;
                 }
+               default:
+                 loop2 = false;
+            }
             }
             // ส่วนกำหนดข้อมูล ผู้ใช้งาน
-            System.out.println("Enter Detail of each account.");
+            if(amountAc!=0){
+            System.out.println("Enter Detail of each account.");}
             for (int i = 1; i <= amountAc; i++) {
                 System.out.println("\nNo." + i);
                 switch (i) {
@@ -100,23 +113,29 @@ public class RmuttATM2 {
                         account2.register();
                         account2.accountInput();
                         while (account2.getUsername().equals(account1.getUsername())) {
-                            System.out.println("\n!!This Account Username already exist.!! Please Re-Assign account No.2\n");
+                            System.out.println(
+                                    "\n!!This Account Username already exist.!! Please Re-Assign account No.2\n");
                             account2.accountInput();
                         }
                         break;
                     case 3:
                         account3.register();
                         account3.accountInput();
-                        while (account3.getUsername().equals(account1.getUsername()) || account3.getUsername().equals(account2.getUsername())) {
-                            System.out.println("\n!!This Account Username already exist.!! Please Re-Assign account No.3\n");
+                        while (account3.getUsername().equals(account1.getUsername())
+                                || account3.getUsername().equals(account2.getUsername())) {
+                            System.out.println(
+                                    "\n!!This Account Username already exist.!! Please Re-Assign account No.3\n");
                             account3.accountInput();
                         }
                         break;
                     case 4:
                         account4.register();
                         account4.accountInput();
-                        while (account4.getUsername().equals(account1.getUsername()) || account4.getUsername().equals(account2.getUsername()) || account4.getUsername().equals(account3.getUsername())) {
-                            System.out.println("\n!!This Account Username already exist.!! Please Re-Assign account No.4\n");
+                        while (account4.getUsername().equals(account1.getUsername())
+                                || account4.getUsername().equals(account2.getUsername())
+                                || account4.getUsername().equals(account3.getUsername())) {
+                            System.out.println(
+                                    "\n!!This Account Username already exist.!! Please Re-Assign account No.4\n");
                             account4.accountInput();
                         }
                         break;
@@ -124,16 +143,25 @@ public class RmuttATM2 {
                         account5.register();
 
                         account5.accountInput();
-                        while (account5.getUsername().equals(account1.getUsername()) || account5.getUsername().equals(account2.getUsername()) || account5.getUsername().equals(account3.getUsername()) || account5.getUsername().equals(account4.getUsername())) {
-                            System.out.println("\n!!This Account Username already exist.!! Please Re-Assign account No.5\n");
+                        while (account5.getUsername().equals(account1.getUsername())
+                                || account5.getUsername().equals(account2.getUsername())
+                                || account5.getUsername().equals(account3.getUsername())
+                                || account5.getUsername().equals(account4.getUsername())) {
+                            System.out.println(
+                                    "\n!!This Account Username already exist.!! Please Re-Assign account No.5\n");
                             account5.accountInput();
                         }
                         break;
                     case 6:
                         account6.register();
                         account6.accountInput();
-                        while (account6.getUsername().equals(account1.getUsername()) || account6.getUsername().equals(account2.getUsername()) || account6.getUsername().equals(account3.getUsername()) || account6.getUsername().equals(account4.getUsername()) || account6.getUsername().equals(account5.getUsername())) {
-                            System.out.println("\n!!This Account Username already exist.!! Please Re-Assign account No.6\n");
+                        while (account6.getUsername().equals(account1.getUsername())
+                                || account6.getUsername().equals(account2.getUsername())
+                                || account6.getUsername().equals(account3.getUsername())
+                                || account6.getUsername().equals(account4.getUsername())
+                                || account6.getUsername().equals(account5.getUsername())) {
+                            System.out.println(
+                                    "\n!!This Account Username already exist.!! Please Re-Assign account No.6\n");
                             account6.accountInput();
                         }
                         break;
@@ -144,22 +172,22 @@ public class RmuttATM2 {
             }
             System.out.println("********************************************************************************\n");
 
-            /* ส่วนของผู้ใช้งานตู้ ATM*/
-            manager.ATMLoop=true;
+            /* ส่วนของผู้ใช้งานตู้ ATM */
+            manager.ATMLoop = true;
             while (manager.ATMLoop) {
                 Scanner input = new Scanner(System.in);
                 System.out.println("""
-                               -----------------------------------------------
-                                 ATM Computer Thanyaburi Bank
-                               -----------------------------------------------""");
+                        -----------------------------------------------
+                          ATM Computer Thanyaburi Bank
+                        -----------------------------------------------""");
                 // ส่วน Login เข้าบัญชีธนาคาร
                 System.out.print("""
-                             ////Log In////
-                             Account ID : """);
+                        ////Log In////
+                        Account Username : """);
                 String userIn = input.nextLine();
                 System.out.print("Account Password  : ");
                 String passIn = input.nextLine();
-                if(userIn.equals(manager.getUsername())|| passIn.equals(manager.getPassword())){
+                if (userIn.equals(manager.getUsername()) || passIn.equals(manager.getPassword())) {
                     manager.accountBalanceList.put(account1.getId(), account1.getBalance());
                     manager.accountBalanceList.put(account2.getId(), account2.getBalance());
                     manager.accountBalanceList.put(account3.getId(), account3.getBalance());
@@ -167,9 +195,7 @@ public class RmuttATM2 {
                     manager.accountBalanceList.put(account5.getId(), account5.getBalance());
                     manager.accountBalanceList.put(account6.getId(), account6.getBalance());
                     manager.managerATM();
-                    
-                }
-                else if (userIn.equals(account1.getUsername()) || passIn.equals(account1.getPassword())) {
+                } else if (userIn.equals(account1.getUsername()) || passIn.equals(account1.getPassword())) {
                     System.out.println("-----------------------------------------------\n");
                     account1.accountBalanceList.put(account2.getId(), account2.getBalance());
                     account1.accountNameList.put(account2.getId(), account2.getName());
@@ -279,9 +305,9 @@ public class RmuttATM2 {
                     account5.setBalance(account6.accountBalanceList.get(account5.getId()));
                 } else {
                     System.out.println("""
-                                   -----------------------------------------------
-                                   !!Access Denied.!!
-                                   -----------------------------------------------""");
+                            -----------------------------------------------
+                            !!Access Denied.!!
+                            -----------------------------------------------""");
                 }
 
             }

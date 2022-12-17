@@ -31,7 +31,7 @@ public class Person extends bankSys {
             name = input.nextLine();
         }
 
-        System.out.print("Sex (F/M/L)= ");
+        System.out.print("Sex ('F' is Female/'M' is Male/'L' or other is LGBTQIA+)= ");
         String sex = input.nextLine();
         switch (sex.toUpperCase()) {
             case "F":
@@ -40,11 +40,11 @@ public class Person extends bankSys {
             case "M":
                 sex = "Male";
                 break;
-            case "L":
-                sex = "LGBTQIA+";
+            case "":
+                sex = "None";
                 break;
             default:
-                sex = "None";
+                sex = "LGBTQIA+";
                 break;
         }
 
