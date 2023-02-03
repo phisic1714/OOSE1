@@ -91,19 +91,19 @@ public class bankSys implements ATMActionable {
     public void ATMSetup() {
         Scanner input = new Scanner(System.in);
         System.out.println("""
-                           -----------------------------------------------
-                           Menu ATM Setup
-                           1. Add Banknote
-                           2. Add Bitcoin Currency
-                           3. Exit""");
+                -----------------------------------------------
+                Menu ATM Setup
+                1. Add Banknote
+                2. Add Bitcoin Currency
+                3. Exit""");
         System.out.print("Choose : ");
         int menuNO = input.nextInt();
         System.out.println("-----------------------------------------------\n");
         switch (menuNO) {
             case 1:
                 System.out.println("""
-                           Please Insert Banknote
-                           -----------------------------------------------""");
+                        Please Insert Banknote
+                        -----------------------------------------------""");
                 System.out.print("100 Bath Amount = ");
                 int hundred = input.nextInt();
                 System.out.print("500 Bath Amount = ");
@@ -117,8 +117,8 @@ public class bankSys implements ATMActionable {
                 break;
             case 2:
                 System.out.println("""
-                           Please Entry Bitcoin Currency
-                           -----------------------------------------------""");
+                        Please Entry Bitcoin Currency
+                        -----------------------------------------------""");
                 System.out.print("1 BTC = ");
                 float btcCurrency = input.nextFloat();
                 setBtcCurrency(btcCurrency);
@@ -138,19 +138,19 @@ public class bankSys implements ATMActionable {
         String CurrentUserID = ID.get(UserNPassN.get(CurrentUsername));
         Scanner input = new Scanner(System.in);
         System.out.println("""
-                           -----------------------------------------------
-                           ATM Computer Thanyaburi Bank
-                           -----------------------------------------------""");
+                -----------------------------------------------
+                ATM Computer Thanyaburi Bank
+                -----------------------------------------------""");
         System.out.println("""
-                           ////Main Menu////
-                           Account ID : """ + CurrentUserID);
+                ////Main Menu////
+                Account ID : """ + CurrentUserID);
         System.out.println("""
-                           Menu Service
-                           1. Account Balance
-                           2. Withdraw
-                           3. Deposit
-                           4. Transfer
-                           5. Exit""");
+                Menu Service
+                1. Account Balance
+                2. Withdraw
+                3. Deposit
+                4. Transfer
+                5. Exit""");
         System.out.print("Choose : ");
         int menuNO = input.nextInt();
         System.out.println("-----------------------------------------------\n");
@@ -182,9 +182,9 @@ public class bankSys implements ATMActionable {
 
     public void Check(String CurrentUsername, String CurrentUserID) {
         System.out.println("""
-                            -----------------------------------------------
-                            ATM Computer Thanyaburi Bank
-                            -----------------------------------------------""");
+                -----------------------------------------------
+                ATM Computer Thanyaburi Bank
+                -----------------------------------------------""");
         while (true) {
             Scanner input2 = new Scanner(System.in);
             System.out.print("Confirm Password : ");
@@ -196,9 +196,11 @@ public class bankSys implements ATMActionable {
                 break;
             }
             System.out.println("""
-                                       -----------------------------------------------
-                                       ////Account Balance////
-                                       Account Citizen ID : """ + CurrentUserID + "\nAccount Name : " + Name.get(CurrentUserID) + "\nAccount Sex :" + Sex.get(CurrentUserID) + "\nBalance : " + Balance.get(CurrentUserID) + " Baht" + "\nBitcoin : " + BTC.get(CurrentUserID) + " BTC");
+                    -----------------------------------------------
+                    ////Account Balance////
+                    Account Citizen ID : """ + CurrentUserID + "\nAccount Name : " + Name.get(CurrentUserID)
+                    + "\nAccount Sex :" + Sex.get(CurrentUserID) + "\nBalance : " + Balance.get(CurrentUserID) + " Baht"
+                    + "\nBitcoin : " + BTC.get(CurrentUserID) + " BTC");
             System.out.print("Continue?(Y/n) : ");
             String conti = input2.nextLine();
             if ("Y".equals(conti.toUpperCase())) {
@@ -210,9 +212,9 @@ public class bankSys implements ATMActionable {
 
     public void Withdraw(String CurrentUsername, String CurrentUserID) {
         System.out.println("""
-                           -----------------------------------------------
-                           ATM Computer Thanyaburi Bank
-                           -----------------------------------------------""");
+                -----------------------------------------------
+                ATM Computer Thanyaburi Bank
+                -----------------------------------------------""");
         while (true) {
             Scanner input3 = new Scanner(System.in);
             System.out.print("Confirm Password : ");
@@ -222,14 +224,14 @@ public class bankSys implements ATMActionable {
                 ATMMenu(CurrentUsername);
             }
             System.out.println("""
-                                       -----------------------------------------------
-                                       ////Withdraw////
-                                       Account Citizen ID : """ + getId());
+                    -----------------------------------------------
+                    ////Withdraw////
+                    Account Citizen ID : """ + getId());
             System.out.println("""
-                                   Select Menu 
-                                -----------------------------------------------
-                                1. Withdraw Bath
-                                2. Withdraw Bitcoin """);
+                       Select Menu
+                    -----------------------------------------------
+                    1. Withdraw Bath
+                    2. Withdraw Bitcoin """);
 
             System.out.print("Choose : ");
             int menuNO = input3.nextInt();
@@ -242,33 +244,43 @@ public class bankSys implements ATMActionable {
                     if (newBalance % 100 == 0) {
                         if (newBalance > Balance.get(CurrentUserID)) {
                             System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                    -----------------------------------------------
+                                    !!Insufficient Funds!!
+                                    -----------------------------------------------""");
                             ATMMenu(CurrentUsername);
                         } else {
                             ArrayList<Integer> bank = new ArrayList<>();
-                            bank.add(0, (int) newBalance / 1000);
-                            if (bank.get(0) - Banknote.get(0) <= 0 || newBalance % 1000 != 0) {
-                                bank.add(1, (int) newBalance / 500);
-                                if (bank.get(1) - Banknote.get(1) <= 0 || newBalance % 500 != 0) {
-                                    bank.add(0, (int) newBalance / 100);
-                                    if (Banknote.get(0) <= 0 && Banknote.get(1) <= 0 && Banknote.get(2) <= 0) {
-                                        System.out.println("""
-                                           -----------------------------------------------
-                                           !!Banknote is Empty!!
-                                           -----------------------------------------------""");
-                                        break;
-                                    }
-                                }
+                            bank.add(0, 0);
+                            bank.add(1, 0);
+                            bank.add(2, 0);
+                            if (Banknote.get(0) > 0 && newBalance % 1000 == 0) {
+                                bank.add(0, (int) Math.floor(newBalance / 1000));
+                                Banknote.add(0, Banknote.get(0) - bank.get(0));
 
+                            } else if (Banknote.get(1) > 0 && newBalance % 500 == 0) {
+                                bank.add(1, (int) Math.floor(newBalance / 500));
+                                Banknote.add(1, Banknote.get(1) - bank.get(1));
+
+                            } else if (Banknote.get(2) > 0 && newBalance % 100 == 0) {
+                                bank.add(2, (int) Math.floor(newBalance / 100));
+                                Banknote.add(2, Banknote.get(2) - bank.get(2));
+
+                            } else if (Banknote.get(0) <= 0 && Banknote.get(1) <= 0 && Banknote.get(2) <= 0) {
+                                System.out.println("""
+                                        -----------------------------------------------
+                                        !!Banknote is Empty!!
+                                        -----------------------------------------------""");
+                                break;
                             }
 
-                            float balance = Balance.get(CurrentUserID) - ((bank.get(0) * 100) + (bank.get(1) * 500) + (bank.get(2) * 1000));
+                            float balance = Balance.get(CurrentUserID)
+                                    - ((bank.get(0) * 1000) + (bank.get(1) * 500) + (bank.get(2) * 100));
                             Balance.put(CurrentUserID, balance);
                             setBalance(balance);
                             System.out.println("-----------------------------------------------\n");
-                            System.out.println("Plaese Recieve Banknote :\n100 Baht = " + bank.get(0) + " Banknote\n500 Baht = " + bank.get(1) + "Banknote\n1000 Baht = " + bank.get(2));
+                            System.out.println(
+                                    "Plaese Recieve Banknote :\n100 Baht = " + bank.get(2) + " Banknote\n500 Baht = "
+                                            + bank.get(1) + " Banknote\n1000 Baht = " + bank.get(0) + " Banknote");
                             System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'");
                             System.out.println("-----------------------------------------------\n");
 
@@ -276,9 +288,9 @@ public class bankSys implements ATMActionable {
                         break;
                     } else {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Can not Release Banknote!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Can not Release Banknote!!
+                                -----------------------------------------------""");
                         continue;
                     }
 
@@ -289,41 +301,51 @@ public class bankSys implements ATMActionable {
                     if (newBalance % 100 == 0) {
                         if (newBalance > getBalance()) {
                             System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                    -----------------------------------------------
+                                    !!Insufficient Funds!!
+                                    -----------------------------------------------""");
                             ATMMenu(CurrentUsername);
                         } else {
                             ArrayList<Integer> bank = new ArrayList<>();
-                            bank.add(0, (int) newBalance / 1000);
-                            if (bank.get(0) - Banknote.get(0) <= 0 || newBalance % 1000 != 0) {
-                                bank.add(1, (int) newBalance / 500);
-                                if (bank.get(1) - Banknote.get(1) <= 0 || newBalance % 500 != 0) {
-                                    bank.add(0, (int) newBalance / 100);
-                                    if (Banknote.get(0) <= 0 && Banknote.get(1) <= 0 && Banknote.get(2) <= 0) {
-                                        System.out.println("""
-                                           -----------------------------------------------
-                                           !!Banknote is Empty!!
-                                           -----------------------------------------------""");
-                                        break;
-                                    }
-                                }
+                            bank.add(0, 0);
+                            bank.add(1, 0);
+                            bank.add(2, 0);
+                            if (Banknote.get(0) > 0 && newBalance % 1000 == 0) {
+                                bank.add(0, (int) Math.floor(newBalance / 1000));
+                                Banknote.add(0, Banknote.get(0) - bank.get(0));
 
+                            } else if (Banknote.get(1) > 0 && newBalance % 500 == 0) {
+                                bank.add(1, (int) Math.floor(newBalance / 500));
+                                Banknote.add(1, Banknote.get(1) - bank.get(1));
+
+                            } else if (Banknote.get(2) > 0 && newBalance % 100 == 0) {
+                                bank.add(2, (int) Math.floor(newBalance / 100));
+                                Banknote.add(2, Banknote.get(2) - bank.get(2));
+
+                            } else if (Banknote.get(0) <= 0 && Banknote.get(1) <= 0 && Banknote.get(2) <= 0) {
+                                System.out.println("""
+                                        -----------------------------------------------
+                                        !!Banknote is Empty!!
+                                        -----------------------------------------------""");
+                                break;
                             }
-                            float newBTC = Balance.get(CurrentUserID) - ((bank.get(0) * 100) + (bank.get(1) * 500) + (bank.get(2) * 1000));
-                            BTC.put(CurrentUserID, newBTC/getBtcCurrency());
+                            float newBTC = Balance.get(CurrentUserID)
+                                    - ((bank.get(0) * 1000) + (bank.get(1) * 500) + (bank.get(2) * 100));
+                            BTC.put(CurrentUserID, newBTC / getBtcCurrency());
                             System.out.println("-----------------------------------------------\n");
-                            System.out.println("Plaese Recieve Banknote :\n100 Baht = " + bank.get(0) + " Banknote\n500 Baht = " + bank.get(1) + "Banknote\n1000 Baht = " + bank.get(2));
-                            System.out.println("Your Bitcoin is '" + BTC.get(CurrentUserID) + "'");
+                            System.out.println(
+                                    "Plaese Recieve Banknote :\n100 Baht = " + bank.get(2) + " Banknote\n500 Baht = "
+                                            + bank.get(1) + " Banknote\n1000 Baht = " + bank.get(0) + " Banknote");
+                            System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'");
                             System.out.println("-----------------------------------------------\n");
 
                         }
                         break;
                     } else {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Can not Release Banknote!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Can not Release Banknote!!
+                                -----------------------------------------------""");
                         continue;
                     }
             }
@@ -335,9 +357,9 @@ public class bankSys implements ATMActionable {
 
     public void Deposit(String CurrentUsername, String CurrentUserID) {
         System.out.println("""
-                           -----------------------------------------------
-                           ATM Computer Thanyaburi Bank
-                           -----------------------------------------------""");
+                -----------------------------------------------
+                ATM Computer Thanyaburi Bank
+                -----------------------------------------------""");
         while (true) {
             Scanner input3 = new Scanner(System.in);
             System.out.print("Confirm Password : ");
@@ -348,25 +370,25 @@ public class bankSys implements ATMActionable {
                 ATMMenu(CurrentUsername);
             }
             System.out.println("""
-                                       -----------------------------------------------
-                                       ////Deposite////
-                                       Account Citizen ID : """ + getId());
+                    -----------------------------------------------
+                    ////Deposite////
+                    Account Citizen ID : """ + getId());
             System.out.println("""
-                                   Select Menu  
-                                -----------------------------------------------
-                                1. Deposit Money
-                                2. Thai Baht Convert to Bitcoin
-                                3. Bitcoin Convert to Thai Baht""");
+                       Select Menu
+                    -----------------------------------------------
+                    1. Deposit Money
+                    2. Thai Baht Convert to Bitcoin
+                    3. Bitcoin Convert to Thai Baht""");
 
             System.out.print("Choose : ");
             int menuNO = input3.nextInt();
             switch (menuNO) {
                 case 1:
                     System.out.print("""
-                             -----------------------------------------------
-                             Please Insert Banknote 
-                             -----------------------------------------------
-                             """);
+                            -----------------------------------------------
+                            Please Insert Banknote
+                            -----------------------------------------------
+                            """);
                     System.out.print("100 Bath Amount = ");
                     int hundred = input3.nextInt();
                     System.out.print("500 Bath Amount = ");
@@ -381,9 +403,9 @@ public class bankSys implements ATMActionable {
                     float balance = Balance.get(CurrentUserID) + newBalance;
                     if (balance > 1000000) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Over Limit!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Over Limit!!
+                                -----------------------------------------------""");
                         ATMMenu(CurrentUsername);
                     } else {
                         Balance.put(CurrentUserID, balance);
@@ -394,24 +416,24 @@ public class bankSys implements ATMActionable {
                     }
                     break;
                 case 2:
-                    System.out.print("Your Bitcoin = "+Balance.get(CurrentUserID));
+                    System.out.print("Your Bitcoin = " + Balance.get(CurrentUserID));
                     System.out.print("Enter Bitcoin Amount (BTC): ");
                     float newBTC = input3.nextFloat();
                     float money = Balance.get(CurrentUserID) - (newBTC * getBtcCurrency());
                     float btc = BTC.get(CurrentUserID) + newBTC;
                     if (money < 0) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Insufficient Funds!!
+                                -----------------------------------------------""");
                         break;
                     }
 
                     if (btc * btcCurrency > 1000000) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Over Limit!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Over Limit!!
+                                -----------------------------------------------""");
                         break;
                     } else {
 
@@ -420,30 +442,31 @@ public class bankSys implements ATMActionable {
                         setBtc(btc);
                         setBalance(money);
                         System.out.println("-----------------------------------------------\n");
-                        System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'\nand Bitcoin is '" + BTC.get(CurrentUserID) + "'");
+                        System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'\nand Bitcoin is '"
+                                + BTC.get(CurrentUserID) + "'");
                         System.out.println("-----------------------------------------------\n");
 
                     }
                     break;
-                    case 3:
-                     System.out.print("Your Bitcoin = "+Balance.get(CurrentUserID));
+                case 3:
+                    System.out.print("Your Bitcoin = " + Balance.get(CurrentUserID));
                     System.out.print("Enter Bitcoin Amount (BTC): ");
-                     float newBTC2 = input3.nextFloat();
-                     money = Balance.get(CurrentUserID) + (newBTC2 * getBtcCurrency());
-                     btc = BTC.get(CurrentUserID) - newBTC2;
+                    float newBTC2 = input3.nextFloat();
+                    money = Balance.get(CurrentUserID) + (newBTC2 * getBtcCurrency());
+                    btc = BTC.get(CurrentUserID) - newBTC2;
                     if (money < 0) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Insufficient Funds!!
+                                -----------------------------------------------""");
                         break;
                     }
 
                     if (btc * btcCurrency > 1000000) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Over Limit!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Over Limit!!
+                                -----------------------------------------------""");
                         break;
                     } else {
 
@@ -452,7 +475,8 @@ public class bankSys implements ATMActionable {
                         setBtc(btc);
                         setBalance(money);
                         System.out.println("-----------------------------------------------\n");
-                        System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'\nand Bitcoin is '" + BTC.get(CurrentUserID) + "'");
+                        System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'\nand Bitcoin is '"
+                                + BTC.get(CurrentUserID) + "'");
                         System.out.println("-----------------------------------------------\n");
 
                     }
@@ -465,9 +489,9 @@ public class bankSys implements ATMActionable {
 
     public void Transfer(String CurrentUsername, String CurrentUserID) {
         System.out.println("""
-                           -----------------------------------------------
-                           ATM Computer Thanyaburi Bank
-                           -----------------------------------------------""");
+                -----------------------------------------------
+                ATM Computer Thanyaburi Bank
+                -----------------------------------------------""");
         while (true) {
             Scanner input3 = new Scanner(System.in);
             System.out.print("Confirm Password : ");
@@ -478,25 +502,25 @@ public class bankSys implements ATMActionable {
                 ATMMenu(CurrentUsername);
             }
             System.out.println("""
-                                       -----------------------------------------------
-                                       ////Transfer////
-                                       Account Citizen ID : """ + CurrentUserID);
+                    -----------------------------------------------
+                    ////Transfer////
+                    Account Citizen ID : """ + CurrentUserID);
             System.out.print("Enter Destination Account Citizen ID : ");
             String destiAc = input3.nextLine();
             if (Name.get(destiAc) == null || destiAc.length() != 13) {
                 System.out.println("""
-                                          -----------------------------------------------
-                                          ID Doesn't Exist.
-                                          ----------------------------------------------- """);
+                        -----------------------------------------------
+                        ID Doesn't Exist.
+                        ----------------------------------------------- """);
 
                 break;
             }
             System.out.print("Destination Account Citizen Name : " + Name.get(destiAc) + "\n");
             System.out.println("""
-                                   Select Currency 
-                                -----------------------------------------------
-                                1. Bath
-                                2. Bitcoin """);
+                       Select Currency
+                    -----------------------------------------------
+                    1. Bath
+                    2. Bitcoin """);
 
             System.out.print("Choose : ");
             int menuNO = input3.nextInt();
@@ -507,25 +531,25 @@ public class bankSys implements ATMActionable {
                     float balance = Balance.get(CurrentUserID) - newBalance;
                     if (balance < 0) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Insufficient Funds!!
+                                -----------------------------------------------""");
                         ATMMenu(CurrentUsername);
                     }
                     float desBalance = Balance.get(destiAc) + newBalance;
                     if (desBalance > 1000000) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Over Limit!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Over Limit!!
+                                -----------------------------------------------""");
                         ATMMenu(CurrentUsername);
                     } else {
                         Balance.put(CurrentUserID, balance);
                         Balance.put(destiAc, desBalance);
                         setBalance(balance);
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Transfer to '""" + Name.get(destiAc) + "' is Complete!!");
+                                -----------------------------------------------
+                                !!Transfer to '""" + Name.get(destiAc) + "' is Complete!!");
                         System.out.println("Your Balance is '" + Balance.get(CurrentUserID) + "'");
                         System.out.println("-----------------------------------------------\n");
 
@@ -537,25 +561,25 @@ public class bankSys implements ATMActionable {
                     float btc = BTC.get(CurrentUserID) - newBTC;
                     if (btc < 0) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Insufficient Funds!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Insufficient Funds!!
+                                -----------------------------------------------""");
                         ATMMenu(CurrentUsername);
                     }
                     float desBTC = BTC.get(destiAc) + newBTC;
                     if (btc * btcCurrency > 1000000) {
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Over Limit!!
-                                           -----------------------------------------------""");
+                                -----------------------------------------------
+                                !!Over Limit!!
+                                -----------------------------------------------""");
                         ATMMenu(CurrentUsername);
                     } else {
                         BTC.put(CurrentUserID, btc);
                         BTC.put(destiAc, desBTC);
                         setBtc(btc);
                         System.out.println("""
-                                           -----------------------------------------------
-                                           !!Transfer to '""" + Name.get(destiAc) + "' is Complete!!");
+                                -----------------------------------------------
+                                !!Transfer to '""" + Name.get(destiAc) + "' is Complete!!");
                         System.out.println("Your Bitcoin is '" + BTC.get(CurrentUserID) + "'");
                         System.out.println("-----------------------------------------------\n");
 
